@@ -45,8 +45,8 @@ export function BoardShowcase() {
       </header>
 
       <ul className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
-        {DIRECTORS.map((d, i) => (
-          <li key={d.id} className={cn(i === 0 && "col-span-2 md:col-span-1")}>
+        {DIRECTORS.map((d) => (
+          <li key={d.id}>
             <button
               type="button"
               onClick={() => open(d.id)}
@@ -61,7 +61,7 @@ export function BoardShowcase() {
                 "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
               )}
             >
-              <DirectorPortrait director={d} hover={hover === d.id} className={cn(i === 0 && "max-md:aspect-[4/3]")} />
+              <DirectorPortrait director={d} hover={hover === d.id} />
               <span className="flex flex-1 flex-col gap-3 border-t border-hairline p-4 sm:p-5">
                 <span className="flex flex-col">
                   <span className="font-semibold text-foreground">{t(d.name)}</span>
