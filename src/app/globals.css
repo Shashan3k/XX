@@ -1,0 +1,358 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Keep Tailwind's class scan to app code: Playwright logs and vendored skills change constantly. */
+@source not "../../.playwright-mcp";
+@source not "../../.agents";
+@source not "../../scripts";
+
+@custom-variant dark (&:is(.dark *));
+/* Tamil runs 20–35% longer: `ta:` adjusts sizes for the Tamil UI. */
+@custom-variant ta (&:where(:lang(ta), :lang(ta) *));
+
+/* ─── Panasuna brand tokens (see .claude/skills/panasuna-brand §2) ─────────── */
+@theme {
+  --color-obsidian: #051311;
+  --color-emerald-900: #0a2a24;
+  --color-emerald-700: #123d34;
+  --color-ink-navy: #0a192f;
+  --color-gold: #d4af37;
+  --color-gold-deep: #8a6a12;
+  --color-ember: #f59e0b;
+  --color-alabaster: #f8fafc;
+  --color-alabaster-muted: rgb(248 250 252 / 0.64);
+  --color-danger: #e5484d;
+
+  --ease-crown: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-vault: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@theme inline {
+  /* Latin face first in every stack: Tamil glyphs fall through to the Tamil face. */
+  --font-sans: var(--font-dm-sans), var(--font-noto-sans-tamil), var(--font-mukta-malar), ui-sans-serif, sans-serif;
+  --font-heading: var(--font-jakarta), var(--font-mukta-malar), var(--font-noto-sans-tamil), sans-serif;
+  --font-display: var(--font-jakarta), var(--font-mukta-malar), var(--font-noto-sans-tamil), sans-serif;
+  --font-display-ta: var(--font-jakarta), var(--font-mukta-malar), var(--font-noto-sans-tamil), sans-serif;
+  --font-tamil: var(--font-noto-sans-tamil), var(--font-mukta-malar), sans-serif;
+  /* Figures: Jakarta's tabular numerals, so ₹ amounts align. */
+  --font-mono: var(--font-jakarta), var(--font-noto-sans-tamil), var(--font-mukta-malar), ui-sans-serif, sans-serif;
+
+  /* Theme-aware brand roles (values per theme below). */
+  --color-gold-ink: var(--gold-ink);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-glass: var(--glass);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning: var(--warning);
+  --color-success-foreground: var(--success-foreground);
+  --color-success: var(--success);
+  --color-info-foreground: var(--info-foreground);
+  --color-info: var(--info);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Two themes. Dark (luminous royal emerald) is the brand default; light is warm royal ivory.
+ * The class on <html> is set before paint by the inline script in app/layout.tsx.
+ * Light rule: gold is never text on alabaster (2.0:1). Text-safe gold is `gold-ink`.
+ */
+:root {
+  color-scheme: light;
+  /* Warm Royal Ivory & Heritage Emerald (client spec 2026-10-29). */
+  --background: #faf6ee;
+  --section-alt: #f2ece1;
+  --foreground: #0a261e;
+  --card: #ffffff;
+  --card-foreground: #0a261e;
+  --popover: #ffffff;
+  --popover-foreground: #0a261e;
+  --primary: #0b3b2e;
+  --primary-foreground: #faf6ee;
+  --secondary: #f2ece1;
+  --secondary-foreground: #0a261e;
+  --muted: #f2ece1;
+  --muted-foreground: #475852;
+  --accent: #ede4d3;
+  --accent-foreground: #0a261e;
+  --destructive: #c62a2f;
+  --destructive-foreground: #a31d22;
+  --border: #e2d9c5;
+  --input: #d5cbb4;
+  --ring: #8c5a08;
+  --radius: 0.5rem;
+  --info: #2b6f86;
+  --info-foreground: #1f5566;
+  --success: #1f7a57;
+  --success-foreground: #17614a;
+  --warning: #b45309;
+  --warning-foreground: #92400e;
+
+  /* Text-safe burnished gold (5.6:1 on ivory) and the gradient for large highlight text. */
+  --gold-ink: #8c5a08;
+  --gold-gradient: linear-gradient(135deg, #8c5a08 0%, #b8860b 50%, #9a6b13 100%);
+  --hairline: #e2d9c5;
+  --hairline-strong: #cdbf9f;
+  --glass: rgb(255 255 255 / 0.72);
+  --stage-glow: #f3e8d2;
+  --tilt-glare: rgb(140 90 8 / 0.08);
+  --page-ambient: radial-gradient(circle at 70% 35%, #f3e8d2 0%, #faf6ee 65%);
+  --surface-shadow: 0 16px 40px -12px rgb(11 43 34 / 0.08);
+}
+
+.dark {
+  color-scheme: dark;
+  /* Luminous Royal Emerald & 24K Gold (client spec 2026-10-29). */
+  --background: #09221c;
+  --section-alt: #09221c;
+  --foreground: #faf7f2;
+  --card: rgb(15 48 39 / 0.72);
+  --card-foreground: #faf7f2;
+  --popover: #0f3027;
+  --popover-foreground: #faf7f2;
+  --primary: var(--color-gold);
+  --primary-foreground: #071f19;
+  --secondary: #154438;
+  --secondary-foreground: #faf7f2;
+  --muted: #0f3027;
+  --muted-foreground: #c4d4ce;
+  --accent: #174a3d;
+  --accent-foreground: #faf7f2;
+  --destructive: var(--color-danger);
+  --destructive-foreground: #ff8a8d;
+  --border: rgb(245 208 97 / 0.2);
+  --input: rgb(245 208 97 / 0.3);
+  --ring: var(--color-gold);
+  --info: #5fb3c9;
+  --info-foreground: #9fd4e2;
+  --success: #3fb68b;
+  --success-foreground: #7fd8b4;
+  --warning: var(--color-ember);
+  --warning-foreground: #fbbf5a;
+
+  --gold-ink: #e5b842;
+  --gold-gradient: linear-gradient(135deg, #f7e5a9 0%, #e5b842 50%, #c9971c 100%);
+  --hairline: rgb(245 208 97 / 0.2);
+  --hairline-strong: rgb(245 208 97 / 0.4);
+  --glass: rgb(15 48 39 / 0.72);
+  --stage-glow: #134236;
+  --tilt-glare: rgb(212 175 55 / 0.13);
+  --page-ambient: radial-gradient(circle at 72% 42%, rgb(212 175 55 / 0.14) 0%, rgb(16 62 50 / 0.45) 38%, #09221c 75%);
+  --surface-shadow: inset 0 1px 0 rgb(245 208 97 / 0.28), inset 0 0 40px rgb(212 175 55 / 0.04);
+}
+
+/* Highlight text ("Your Panasuna.", accent figures): burnished gold on ivory, liquid 24K gold on emerald. */
+@utility text-gold-gradient {
+  background-image: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image: var(--page-ambient);
+    background-attachment: fixed;
+    line-height: 1.6;
+  }
+  :lang(ta) body {
+    line-height: 1.75;
+  }
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  :lang(ta) h1,
+  :lang(ta) h2 {
+    font-family: var(--font-display-ta);
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  /* Figures align: tabular runs (amounts, counters) are set in Jakarta. Prose paragraphs that merely
+     contain a figure keep DM Sans, which has its own tabular numerals. */
+  .tabular-nums:not(p) {
+    font-family: var(--font-mono);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* ─── Surfaces and CTAs (both themes, token-driven) ─────────────────────────── */
+
+/* Light: alternate full-width home sections sit on sandstone; re-pointing --background keeps every
+   bg-background tile and stage gradient inside them in step. */
+:root:not(.dark) main > section:nth-of-type(even) {
+  --background: var(--section-alt);
+  background-color: var(--section-alt);
+}
+
+/* Cards: white with ambient elevation on ivory; jade glass with a gold top light on emerald. */
+:where([class*="bg-card"]) {
+  box-shadow: var(--surface-shadow);
+}
+/* Light: card surfaces are crisp white even where a component asked for a translucent card tint. */
+:root:not(.dark) [class*="bg-card/"] {
+  background-color: var(--card);
+}
+.dark :where([class*="bg-card"]) {
+  backdrop-filter: blur(16px) saturate(130%);
+}
+/* Phones and tablets: a backdrop blur per card is re-sampled on every scroll frame and was the main
+   cause of mobile scroll jank. Over the flat page background it's visually a no-op, so drop it. */
+@media (max-width: 1023.98px) {
+  .dark :where([class*="bg-card"]) {
+    backdrop-filter: none;
+  }
+}
+
+/* Primary CTA: heritage emerald with a gold inner rule (light); 24K gold gradient with a glow (dark). */
+[data-slot="button"][data-variant="default"] {
+  transition-property: translate, box-shadow, background-color, filter;
+  transition-duration: 160ms;
+}
+:root:not(.dark) [data-slot="button"][data-variant="default"] {
+  border-color: rgb(212 175 55 / 0.4);
+  box-shadow: inset 0 0 0 1px rgb(212 175 55 / 0.4);
+}
+:root:not(.dark) [data-slot="button"][data-variant="default"]:hover {
+  translate: 0 -1px;
+  box-shadow: inset 0 0 0 1px rgb(212 175 55 / 0.6), 0 10px 24px -10px rgb(184 134 11 / 0.45);
+}
+.dark [data-slot="button"][data-variant="default"] {
+  background-image: linear-gradient(135deg, #ecc454 0%, #d4af37 100%);
+  color: #071f19;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgb(212 175 55 / 0.28);
+}
+.dark [data-slot="button"][data-variant="default"]:hover {
+  translate: 0 -1px;
+  filter: brightness(1.05);
+  box-shadow: 0 10px 30px rgb(212 175 55 / 0.38);
+}
+/* Secondary CTA in light: white, warm stone border, ink text, a whisper of shadow. */
+:root:not(.dark) [data-slot="button"][data-variant="outline"] {
+  background-color: #ffffff;
+  border-color: #d5cbb4;
+  color: #0a261e;
+  box-shadow: 0 2px 8px -2px rgb(11 43 34 / 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Touch screens: grow the hit area to 44×44 around a compact control without changing how it looks.
+   The element must be positioned (relative/absolute). */
+@utility touch-target {
+  @media (pointer: coarse) {
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      translate: -50% -50%;
+    }
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Hero intro: the one orchestrated entrance on the home page (panasuna-brand §6). */
+@keyframes pn-rise {
+  from {
+    transform: translateY(110%);
+  }
+}
+@keyframes pn-settle {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes pn-coin-spin {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+/* Customer marquee (home §9): the list renders twice, so sliding by half its width loops without a seam. */
+@keyframes pn-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* Contact map: the office pin's beacon. */
+@keyframes pn-ping {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@keyframes pn-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(300%);
+  }
+}
+
+/* Theme switch: a circular reveal from the toggle (View Transitions), driven by lib/theme.tsx. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
