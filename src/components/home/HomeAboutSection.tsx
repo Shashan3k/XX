@@ -54,7 +54,7 @@ export function HomeAboutSection() {
                   href={`${navHref("about")}#board`}
                   className="group flex h-full flex-col overflow-hidden rounded-3xl border border-hairline transition-[translate,border-color] duration-[160ms] hover:-translate-y-1 hover:border-hairline-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:hover:translate-y-0"
                 >
-                  <DirectorPortrait director={d} sizes="(min-width: 1024px) 15vw, (min-width: 640px) 30vw, 50vw" className="aspect-[5/4]" />
+                  <DirectorPortrait director={d} sizes="(min-width: 1024px) 15vw, (min-width: 640px) 30vw, 50vw" className="aspect-[4/5]" />
                   <span className="flex flex-col border-t border-hairline p-4">
                     <span className="text-sm font-semibold text-foreground">{t(d.name)}</span>
                     <span className="text-xs text-muted-foreground">{t(d.role)}</span>
