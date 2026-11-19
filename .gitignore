@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Browser-automation artefacts (Playwright MCP screenshots, snapshots, console logs)
 /.playwright-mcp/
+
+# raw source portraits (optimized copies live in public/photos)
+/photos/

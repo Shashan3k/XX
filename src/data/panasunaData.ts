@@ -1360,13 +1360,13 @@ export const COMPARISONS: readonly Comparison[] = [
     },
     chit: {
       en: [
-        "Patient savers can earn an effective dividend gain of about 8–12% a year, above typical FD rates.",
+        "Patient savers can earn an effective dividend gain of about 8–14% a year, above typical FD rates.",
         "Returns are paid in the form of dividends.",
         "If you have a lump sum, you can invest it in another chit.",
         "Use the funds for any planned or unplanned expense — or wait until the end of the chit and enjoy higher dividends.",
       ],
       ta: [
-        "பொறுமையாகச் சேமிப்போர் ஆண்டுக்குச் சுமார் 8–12% திறன்மிகு ஈவுத்தொகை ஆதாயம் பெறலாம்; இது வழக்கமான FD வட்டியை விட அதிகம்.",
+        "பொறுமையாகச் சேமிப்போர் ஆண்டுக்குச் சுமார் 8–14% திறன்மிகு ஈவுத்தொகை ஆதாயம் பெறலாம்; இது வழக்கமான FD வட்டியை விட அதிகம்.",
         "வருவாய் ஈவுத்தொகையாக (டிவிடெண்ட்) வழங்கப்படுகிறது.",
         "கையில் மொத்தத் தொகை இருந்தால், அதை மற்றொரு சீட்டில் முதலீடு செய்யலாம்.",
         "திட்டமிட்ட அல்லது எதிர்பாராத எந்தச் செலவுக்கும் நிதியைப் பயன்படுத்தலாம் — அல்லது சீட்டு முடியும் வரை காத்திருந்து அதிக ஈவுத்தொகையைப் பெறலாம்.",
@@ -1407,11 +1407,11 @@ export const COMPARISONS: readonly Comparison[] = [
     },
     chit: {
       en: [
-        "Put the same monthly amount into a chit and a patient saver can earn about 8–12% a year in dividends.",
+        "Put the same monthly amount into a chit and a patient saver can earn about 8–14% a year in dividends.",
         "A chit also lets you bid for the full sum in an early month, which a recurring deposit never allows.",
       ],
       ta: [
-        "அதே மாதத் தொகையைச் சீட்டில் செலுத்தினால், பொறுமையாகச் சேமிப்போர் ஆண்டுக்குச் சுமார் 8–12% ஈவுத்தொகை ஈட்டலாம்.",
+        "அதே மாதத் தொகையைச் சீட்டில் செலுத்தினால், பொறுமையாகச் சேமிப்போர் ஆண்டுக்குச் சுமார் 8–14% ஈவுத்தொகை ஈட்டலாம்.",
         "ஆரம்ப மாதத்திலேயே முழுத் தொகைக்கு ஏலம் கேட்கவும் சீட்டில் முடியும்; தொடர் வைப்பில் இது ஒருபோதும் சாத்தியமில்லை.",
       ],
     },
@@ -1445,12 +1445,12 @@ export const COMPARISONS: readonly Comparison[] = [
     chit: {
       en: [
         "A smart salaried employee can plan a car purchase using a chit.",
-        "An early bidder's effective net borrowing cost is about 10–14% a year, because monthly dividends offset the bid discount.",
+        "An early bidder's effective net borrowing cost is about 5–11% a year, because monthly dividends offset the bid discount.",
         "No prepayment penalty, no processing fee, and far less paperwork and fewer sureties than a personal loan.",
       ],
       ta: [
         "திட்டமிடும் சம்பளதாரர் சீட்டு மூலம் கார் வாங்குவதைத் திட்டமிடலாம்.",
-        "முன்னதாக ஏலம் எடுப்பவரின் திறன்மிகு நிகரக் கடன் செலவு ஆண்டுக்குச் சுமார் 10–14%; மாத ஈவுத்தொகை ஏலத் தள்ளுபடியை ஈடுசெய்கிறது.",
+        "முன்னதாக ஏலம் எடுப்பவரின் திறன்மிகு நிகரக் கடன் செலவு ஆண்டுக்குச் சுமார் 5–11%; மாத ஈவுத்தொகை ஏலத் தள்ளுபடியை ஈடுசெய்கிறது.",
         "முன்கூட்டிச் செலுத்தும் அபராதம் இல்லை, செயலாக்கக் கட்டணம் இல்லை; தனிநபர் கடனை விட ஆவணங்களும் ஜாமீன் தேவைகளும் மிகக் குறைவு.",
       ],
     },
@@ -1642,7 +1642,7 @@ export const COMPARE_TOOLS = {
     /** Panasuna's own two bars: the saver's gain (earn group) and the early bidder's net cost (cost group). */
     chitEarn: {
       min: 8,
-      max: 12,
+      max: 14,
       label: { en: "Panasuna chit (saver)", ta: "பனசுனா சீட்டு (சேமிப்பாளர்)" },
       note: {
         en: "Effective dividend gain for patient savers, through monthly auction dividends. No lock-in penalty.",
@@ -1650,8 +1650,8 @@ export const COMPARE_TOOLS = {
       },
     },
     chitCost: {
-      min: 10,
-      max: 14,
+      min: 5,
+      max: 11,
       label: { en: "Panasuna chit (early bidder)", ta: "பனசுனா சீட்டு (முன்னதாக எடுப்போர்)" },
       note: {
         en: "Effective net cost for early bidders: accumulated dividends offset the bid discount, with zero prepayment penalty and no bank processing charges.",
@@ -2012,7 +2012,7 @@ export interface Director {
   role: Localized;
   bio: Localized<readonly string[]>;
   badges: readonly DirectorBadge[];
-  /** Real portrait in /public/photos (Gemini watermark cropped out). */
+  /** Real studio portrait in /public/photos (960×1200 JPG, 4:5 — matches the DirectorPortrait frame). */
   photo: string;
   avatar: { monogram: string; motif: AvatarMotif; tone: "gold" | "emerald" };
 }
@@ -2064,7 +2064,7 @@ export const DIRECTORS: readonly Director[] = [
     photo: "/photos/k-karunanithy.jpg",
     order: 3,
     name: { en: "K. Karunanithy", ta: "கே. கருணாநிதி" },
-    role: { en: "Director", ta: "இயக்குநர்" },
+    role: { en: "President", ta: "தலைவர்" },
     bio: {
       en: [
         "A central figure in the company — “the backbone” is the phrase that suits him best. Unlike other members of the board, he began his career directly at Panasuna. Chit funds are his life's work: he reads customer needs quickly and meets them with the right chit plan.",
@@ -2088,19 +2088,19 @@ export const DIRECTORS: readonly Director[] = [
       en: [
         "The youngest director of the company — and one of the youngest voices in the chit industry. Convinced by his grandfather's belief that the chit business never ends, he left his job in investment banking, earned a Master's in Business Administration and also completed a law degree.",
         "He is passionate about educating the younger generation about chit funds and clearly explains their advantages over other financial instruments. He works with graduating college students to help them start saving through chit funds.",
-        "With his systematic, energetic ideas and the teamwork of the senior directors, Panasuna's business has grown many times over. He serves as a Finance Committee Member representing Tamil Nadu in the AIACF, Joint Secretary of the TNCFA, and an Executive Committee Member of the SCFFA.",
+        "With his systematic, energetic ideas and the teamwork of the senior directors, Panasuna's business has grown many times over. He serves as a Finance Committee Member representing Tamil Nadu in the AIACF, Secretary of the TNCFA, and Joint Secretary of the SCFFA.",
       ],
       ta: [
         "நிறுவனத்தின் இளைய இயக்குநர் — சீட்டுத் துறையின் இளம் குரல்களிலும் ஒருவர். “சீட்டுத் தொழிலுக்கு முடிவே இல்லை” என்ற தம் தாத்தாவின் சொற்களில் நம்பிக்கை கொண்டு, முதலீட்டு வங்கித் துறைப் பணியைத் துறந்தார்; வணிக நிர்வாகத்தில் முதுநிலைப் பட்டமும், சட்டப் பட்டமும் பெற்றார்.",
         "சீட்டு நிதி பற்றி இளைய தலைமுறைக்குக் கற்பிப்பதில் ஆர்வம் கொண்டவர்; பிற நிதிக் கருவிகளுடன் ஒப்பிட்டுச் சீட்டின் நன்மைகளைத் தெளிவாக விளக்குபவர். கல்லூரிப் படிப்பை முடிக்கும் மாணவர்கள் சீட்டு மூலம் சேமிப்பைத் தொடங்க வழிகாட்டுகிறார்.",
-        "அவரது முறையான, உற்சாகமான சிந்தனைகளாலும் மூத்த இயக்குநர்களின் கூட்டு உழைப்பாலும் பனசுனாவின் வணிகம் பன்மடங்கு வளர்ந்துள்ளது. தற்போது AIACF-இல் தமிழ்நாட்டின் சார்பில் நிதிக் குழு உறுப்பினராகவும், TNCFA-வின் இணைச் செயலாளராகவும், SCFFA-வின் செயற்குழு உறுப்பினராகவும் உள்ளார்.",
+        "அவரது முறையான, உற்சாகமான சிந்தனைகளாலும் மூத்த இயக்குநர்களின் கூட்டு உழைப்பாலும் பனசுனாவின் வணிகம் பன்மடங்கு வளர்ந்துள்ளது. தற்போது AIACF-இல் தமிழ்நாட்டின் சார்பில் நிதிக் குழு உறுப்பினராகவும், TNCFA-வின் செயலாளராகவும், SCFFA-வின் இணைச் செயலாளராகவும் உள்ளார்.",
       ],
     },
     badges: [
       { association: "AIACF", title: { en: "Finance Committee Member (Tamil Nadu)", ta: "நிதிக் குழு உறுப்பினர் (தமிழ்நாடு)" }, current: true },
       // VERIFY: old site says "JS of TNCFCA" — read here as Joint Secretary of the TNCFA.
-      { association: "TNCFA", title: { en: "Joint Secretary", ta: "இணைச் செயலாளர்" }, current: true },
-      { association: "SCFFA", title: { en: "Executive Committee Member", ta: "செயற்குழு உறுப்பினர்" }, current: true },
+      { association: "TNCFA", title: { en: "Secretary", ta: "செயலாளர்" }, current: true },
+      { association: "SCFFA", title: { en: "Joint Secretary", ta: "இணைச் செயலாளர்" }, current: true },
     ],
     avatar: { monogram: "MK", motif: "ascent", tone: "emerald" },
   },
@@ -2114,15 +2114,19 @@ export const DIRECTORS: readonly Director[] = [
       en: [
         "With a Master's degree in Business Management from Ireland and three years as a Financial Analyst in the Irish financial sector, he has built a solid foundation in finance and management. His years abroad gave him a deep understanding of global financial practices, which he now applies to his work in India.",
         "He has made it his mission to raise awareness of registered chit funds, and is passionate about helping people make better financial decisions by comparing chit schemes with the modern tools available. He regularly gives presentations to college students on financial awareness, the importance of registered chit funds, and their role in responsible saving and borrowing.",
-        "He currently heads Young Minds, a state-level organisation that encourages and guides the younger generation to take part in — and take leadership roles within — the chit fund industry.",
+        "He currently heads Young Minds, a state-level organisation that encourages and guides the younger generation to take part in — and take leadership roles within — the chit fund industry. He is also an Executive Committee Member of the TNCFA and of the SCFFA.",
       ],
       ta: [
         "அயர்லாந்தில் வணிக மேலாண்மையில் முதுநிலைப் பட்டமும், ஐரிஷ் நிதித் துறையில் நிதி ஆய்வாளராக மூன்று ஆண்டு அனுபவமும் பெற்றவர். வெளிநாட்டுப் பணி அனுபவம் உலகளாவிய நிதி நடைமுறைகள் குறித்த ஆழ்ந்த புரிதலைத் தந்தது; அதை இப்போது இந்தியாவில் தம் பணியில் பயன்படுத்துகிறார்.",
         "“பதிவு செய்யப்பட்ட சீட்டு நிதிகள்” குறித்த விழிப்புணர்வை ஏற்படுத்துவதைத் தம் இலக்காகக் கொண்டுள்ளார்; நவீன கருவிகளைக் கொண்டு சீட்டுத் திட்டங்களை ஒப்பிட்டுச் சிறந்த நிதி முடிவுகளை எடுக்க மக்களுக்குக் கற்பிப்பதில் ஆர்வம் கொண்டவர். நிதி விழிப்புணர்வு, பதிவு செய்யப்பட்ட சீட்டு நிதிகளின் முக்கியத்துவம், பொறுப்பான சேமிப்பு மற்றும் கடன் பழக்கங்களில் அவற்றின் பங்கு குறித்துக் கல்லூரி மாணவர்களுக்கு விளக்கக்காட்சிகள் வழங்கி வருகிறார்.",
-        "இளைய தலைமுறையினர் சீட்டு நிதித் துறையில் தீவிரமாகப் பங்கேற்கவும் தலைமைப் பொறுப்புகளை ஏற்கவும் ஊக்குவித்து வழிகாட்டும் மாநில அளவிலான அமைப்பான “யங் மைண்ட்ஸ்”-இன் தலைவராக உள்ளார்.",
+        "இளைய தலைமுறையினர் சீட்டு நிதித் துறையில் தீவிரமாகப் பங்கேற்கவும் தலைமைப் பொறுப்புகளை ஏற்கவும் ஊக்குவித்து வழிகாட்டும் மாநில அளவிலான அமைப்பான “யங் மைண்ட்ஸ்”-இன் தலைவராக உள்ளார்; TNCFA மற்றும் SCFFA ஆகியவற்றின் செயற்குழு உறுப்பினராகவும் உள்ளார்.",
       ],
     },
-    badges: [{ association: "YOUNG_MINDS", title: { en: "Head", ta: "தலைவர்" }, current: true }],
+    badges: [
+      { association: "YOUNG_MINDS", title: { en: "Head", ta: "தலைவர்" }, current: true },
+      { association: "TNCFA", title: { en: "Executive Committee Member", ta: "செயற்குழு உறுப்பினர்" }, current: true },
+      { association: "SCFFA", title: { en: "Executive Committee Member", ta: "செயற்குழு உறுப்பினர்" }, current: true },
+    ],
     avatar: { monogram: "KH", motif: "compass", tone: "gold" },
   },
 ];
@@ -2244,29 +2248,29 @@ export const QUOTES: { buffett: { author: Localized; quotes: readonly Quote[] };
       {
         id: "dependent",
         text: {
-          en: "He is not dependent on us. We are dependent on him.",
-          ta: "அவர் நம்மைச் சார்ந்திருக்கவில்லை. நாம்தான் அவரைச் சார்ந்திருக்கிறோம்.",
+          en: "The customer is not dependent on us. We are dependent on the customer.",
+          ta: "வாடிக்கையாளர் நம்மைச் சார்ந்திருக்கவில்லை. நாம்தான் வாடிக்கையாளரைச் சார்ந்திருக்கிறோம்.",
         },
       },
       {
         id: "purpose",
         text: {
-          en: "He is not an interruption in our work. He is the purpose of it.",
-          ta: "அவர் நம் பணிக்கு இடையூறு அல்ல. அவரே நம் பணியின் நோக்கம்.",
+          en: "A customer is not an interruption in our work. A customer is the purpose of it.",
+          ta: "வாடிக்கையாளர் நம் பணிக்கு இடையூறு அல்ல. வாடிக்கையாளரே நம் பணியின் நோக்கம்.",
         },
       },
       {
         id: "part-of-it",
         text: {
-          en: "He is not an outsider in our business. He is part of it.",
-          ta: "அவர் நம் தொழிலுக்கு அந்நியர் அல்ல. அவர் அதன் ஒரு பகுதி.",
+          en: "A customer is not an outsider in our business. A customer is part of it.",
+          ta: "வாடிக்கையாளர் நம் தொழிலுக்கு அந்நியர் அல்ல. வாடிக்கையாளர் அதன் ஒரு பகுதி.",
         },
       },
       {
         id: "favour",
         text: {
-          en: "We are not doing him a favour by serving him. He is doing us a favour by giving us an opportunity to do so.",
-          ta: "அவருக்குச் சேவை செய்வதன் மூலம் நாம் அவருக்கு உதவி செய்யவில்லை. அவ்வாறு செய்ய நமக்கு வாய்ப்பளிப்பதன் மூலம் அவர்தான் நமக்கு உதவி செய்கிறார்.",
+          en: "We are not doing the customer a favour by serving them. The customer is doing us a favour by giving us an opportunity to do so.",
+          ta: "வாடிக்கையாளருக்குச் சேவை செய்வதன் மூலம் நாம் அவருக்கு உதவி செய்யவில்லை. அவ்வாறு செய்ய நமக்கு வாய்ப்பளிப்பதன் மூலம் வாடிக்கையாளர்தான் நமக்கு உதவி செய்கிறார்.",
         },
       },
       // VERIFY: widely circulated with the lines above, but this sentence is not reliably traced to Gandhi.

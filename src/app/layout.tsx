@@ -34,10 +34,10 @@ const muktaMalar = Mukta_Malar({
 });
 
 /**
- * Runs before first paint so a stored light theme never flashes dark. Dark is the default,
- * so the server-rendered `dark` class only ever needs removing. Keep in sync with lib/theme.tsx.
+ * Runs before first paint so a stored dark theme never flashes light. Light is the default,
+ * so the server-rendered markup has no `dark` class and it only ever needs adding. Keep in sync with lib/theme.tsx.
  */
-const THEME_SCRIPT = `try{if(localStorage.getItem("pn-theme")==="light"){var d=document.documentElement;d.classList.remove("dark");d.style.colorScheme="light"}}catch(e){}`;
+const THEME_SCRIPT = `try{if(localStorage.getItem("pn-theme")==="dark"){var d=document.documentElement;d.classList.add("dark");d.style.colorScheme="dark"}}catch(e){}`;
 
 export const metadata: Metadata = {
   title: "Panasuna Chits (P) Ltd. — Salem, since 1975",
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`dark ${jakarta.variable} ${dmSans.variable} ${notoSansTamil.variable} ${muktaMalar.variable} h-full antialiased`}
+      className={`${jakarta.variable} ${dmSans.variable} ${notoSansTamil.variable} ${muktaMalar.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
