@@ -35,9 +35,9 @@ function applyTheme(theme: Theme) {
   listeners.forEach((cb) => cb());
 }
 
-/** The <html> class is the store; the server always renders the brand default, dark. */
+/** The <html> class is the store; the server always renders the default, light. */
 export function useTheme(): Theme {
-  return React.useSyncExternalStore<Theme>(subscribe, readTheme, () => "dark");
+  return React.useSyncExternalStore<Theme>(subscribe, readTheme, () => "light");
 }
 
 /** Switches theme with a circular reveal from `origin` where View Transitions exist. */

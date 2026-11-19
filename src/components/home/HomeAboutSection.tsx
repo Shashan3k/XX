@@ -42,6 +42,10 @@ export function HomeAboutSection() {
               <p>{t(ABOUT_PAGE.purpose.motto)}</p>
             </blockquote>
             <figcaption className="leading-relaxed text-muted-foreground">{t(ABOUT_PAGE.purpose.mission.body)}</figcaption>
+            <div className="flex flex-col gap-2 border-t border-hairline pt-5">
+              <p className="text-sm font-semibold text-gold-ink">{t(ABOUT_PAGE.purpose.vision.title)}</p>
+              <p className="leading-relaxed text-muted-foreground">{t(ABOUT_PAGE.purpose.vision.body)}</p>
+            </div>
             <p className="border-t border-hairline pt-5 text-sm text-muted-foreground">
               “{t(savings.text)}” — {t(QUOTES.buffett.author)}
             </p>
